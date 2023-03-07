@@ -7,22 +7,31 @@ Before you can use the camjaira webserver, you need the following things.
 1. Python 3.11 or newer
 2. A venv with django and pillow libraries
 
-## SETTING THE VENV
-When you open the project directory, keep an eye for the 'venv' folder
-Delete it if it is in the project, you have to make your own.
+## BASIC USAGE
+Once the setup is done, you can use it rightaway
+## BASIC USAGE
+Once the setup is done, you can use it rightaway
 
-Open the terminal or powershell in the project and make a venv:
+### RUN LOCALLY ON MACHINE
 
 ```
-python -m venv venv
+python camjaira/manage.py runserver
 ```
 
-! INSTALLING LIBRARIES ONTO THE VENV
-Next you need to install the new libraries, before that, activate the venv first:
+### RUN ON LOCAL NETWORK
 
-    ```venv/scripts/activate```
+```
+python camjaira/manage.py runserver 0.0.0.0:8000
+```
 
-You do need to do this everytime for every powershell or terminal instance.
-Moving on, you can simply install the libraries:
+### RESET THE DATABASE
 
-    ```pip install django, pillow```
+```
+python camjaira/manage.py flush
+```
+
+### CREATE ADMIN ACCOUNT
+
+```
+python camjaira/manage.py createsuperuser
+```
