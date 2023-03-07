@@ -1,0 +1,90 @@
+.card-container {
+    width:100%;
+    height:25vh;
+    margin: auto;
+    background-color: black;
+    background-size: cover;
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 5px #000;
+    box-shadow: 0 0 5px #000;
+}
+.overlay {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr 2fr 1fr;
+    background: rgba(117, 8, 8, 0.9);
+    color: #ffffff;
+    opacity: 0;
+    transition: all 0.5s;
+    font-family: 'Raleway', serif;
+}
+.items {
+    padding-left: 20px;
+    letter-spacing: 3px;
+}
+.card-head {
+    font-size: 30px;
+    line-height: 40px;
+    transform: translateY(40px);
+    transition: all 0.7s;
+}
+.card-head hr {
+    display: block;
+    width: 0;
+    border: none;
+    border-bottom: solid 2px #fef5df;
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    transition: all 0.5s;
+}
+.price {
+    font-size: 22px;
+    line-height: 10px;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.3s;
+}
+.price .old {
+    text-decoration: line-through;
+    color: #b3b3b3;
+}
+.info {
+    font-size: 12px;
+    opacity: 0;
+    letter-spacing: 1px;
+    font-family: 'Raleway', sans-serif;
+    transform: translateY(40px);
+    transition: all 0.3s;
+}
+.info img {
+    width:16px;
+    height:auto;
+    filter:invert(100%);
+}
+.info span {
+    margin-left: 10px;
+}
+.card-container:hover .overlay {
+    opacity: 1;
+}
+.card-container:hover .overlay .card-head {
+    transform: translateY(0px);
+}
+.card-container:hover .overlay hr {
+    width: 75px;
+    transition-delay: 0.4s;
+}
+.card-container:hover .overlay .price {
+    transform: translateY(0px);
+    transition-delay: 0.3s;
+    opacity: 1;
+}
+.card-container:hover .overlay .info {
+    transform: translateY(0px);
+    transition-delay: 0.6s;
+    opacity: 1;
+}

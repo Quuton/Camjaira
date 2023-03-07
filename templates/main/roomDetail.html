@@ -1,0 +1,97 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Viewing Room {{room.id}}{% endblock %}
+
+{% block content %}
+<div class="container my-5 detail">
+    <div class="row">
+        <div class="titlepage px-2">
+            <h2>Room details</h2>
+        </div>
+    </div>
+    <div class="row d-flex flex-wrap align-items-center">
+        <div class="col-md-3 col-12">
+            {% if room.image %}
+            <a href="{{room.image.url}}">
+                <img src="{{room.image.url}}" style="width:100%;height:auto;object-fit:cover" class="d-block">
+            </a>
+            {% else %}
+            <a href="{% static 'images/placeholder.png' %}">
+                <img src="{% static 'images/placeholder.png' %}" style="width:100%;height:auto;object-fit:cover" class="d-block">
+            </a>
+            {% endif %}
+        </div>
+
+        <div class="col-md-6 col-12 my-5">
+            <h1>{{room.number}}</h1>
+            {% if room.availability%}
+            <span class="badge badge-success">Available</span>
+            {% else %}
+            <span class="badge badge-danger">Not available</span>
+            {% endif %}
+
+            <hr>
+            <p style="word-break: break-all;
+            white-space: normal;">
+                {{room.description}}
+            </p>
+        </div>
+
+        <div class="col-md-3 col-12 d-flex my-3">
+            <div class="container-fluid">
+                <div class="row justify-content-center mb-1">
+                    <h1 class="d-block">Specifications</h1>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="text-md-left text-center col-md-12 col-6 d-block px-3">
+                        <h2 class="font-weight-bold">Price</h2>{{room.price}} ₱
+                    </div>
+                    <div class="text-md-left text-center col-md-12 col-6 d-block px-3">
+                        <h2 class="font-weight-bold">Size</h2>{{room.size}} m²
+                    </div>
+                    <div class="text-md-left text-center col-md-12 col-6 d-block px-3">
+                        <h2 class="font-weight-bold">Type</h2><span class="badge badge-secondary">{{room.type}}</span>
+                    </div>
+                    <div class="text-md-left text-center col-md-12 col-6 d-block px-3">
+                        <h2 class="font-weight-bold">Floor</h2>{{room.floor}}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+    <div class="row">
+        <div
+            class="col-12 align-items-md-start justify-content-md-start text-md-left align-items-center justify-content-center text-center">
+            <h2>Actions</h2>
+            <div class="d-inline-block" title="Edit">
+                <a href="/edit-room/{{room.id}}">
+                    <button type="button" class="btn btn-warning px-1 mx-1">
+                        <img style="width:100%;height:auto" class="control-button" src="{%static 'icon/edit.svg'%}">
+                    </button>
+                </a>
+            </div>
+            <div class="d-inline-block" title="Delete">
+                <a href="/delete-room/{{room.id}}">
+                    <button type="button" class="btn btn-danger px-1 mx-1">
+                        <img style="width:100%;height:auto" class="control-button" src="{%static 'icon/delete.svg'%}">
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-md-start justify-content-center">
+            <a class="read_more mt-5" href="/services/">Go back</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

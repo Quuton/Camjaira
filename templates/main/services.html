@@ -1,0 +1,31 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Rooms{% endblock %}
+{% block content %}
+<!-- <div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="titlepage">
+                <h2>Filter Results</h2>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="services_main">
+    {% include 'main/components/roomList.html' %}
+</div>
+
+<div class="container my-5">
+    <div class="row">
+            {% if user.is_authenticated %}
+            <div class="col-12 d-flex justify-content-md-start justify-content-center">
+                <a class="read_more mt-5" href="/create-room/{{room.id}}">Create a room</a>
+            </div>
+            {% endif %}
+            <div class="col-12 d-flex justify-content-md-start justify-content-center">
+                <a class="read_more mt-5" href="/list-room/">Use the search system</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

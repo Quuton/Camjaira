@@ -1,0 +1,36 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid contact">
+    <div class="container my-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12">
+                <div class="titlepage p-0 text-md-left text-center">
+                    <h2>Login Page</h2>
+                </div>
+            </div>
+
+        </div>
+        <div class="row my-5">
+            <div class="col-12 d-flex justify-content-center">
+                <form name="login" class="main_form" method="post">
+                    {% csrf_token %}
+                    <input class="form-control" placeholder="Username" type="text" name="username">
+                    <input class="form-control" placeholder="*****" type="password" name="password">
+                    <button class="send">Send</button>
+                </form>
+            </div>
+        </div>
+        <div class="row my-5">
+            <div class="col-12 d-flex text-center justify-content-center">
+                <p class="text-center justify-content-center ">{{loginStatus}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<!-- about-->
+<div class="about">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="titlepage">
+                    <h2>About us</h2>
+                    <p>Based in Taguig with clients & team members all over Manila </p>
+                </div>
+            </div>
+            <div class=" col-sm-12">
+                <div class="about_box">
+                    <div class="row d_flex">
+                        <div class="col-md-5">
+                            <div class="about_box_text">
+                                <h3>Camjaira Rental Services</h3>
+                                <p>As one of the best Rental Services system, A website is made to further promote and
+                                    expand the influence our rentals services can provide.
+                                </p>
+                                
+                            </div>
+                        </div>
+                        <div class=" col-md-7  pppp">
+                            <div class="about_box_img">
+                                <figure><img src="{% static 'images/about_img.png' %}" alt="#" /></figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end about-->
+{% endblock %}

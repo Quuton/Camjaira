@@ -1,0 +1,177 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Camjaira{% endblock %}
+
+{% block content %}
+
+<!-- start slider section -->
+<div class="banner_main" style="background-attachment: fixed;background-size: cover;background-position: 50% 0% ;">
+   <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+         <li data-target="#myCarousel" data-slide-to="1"></li>
+      </ol>
+      <div class="carousel-inner">
+         <div class="carousel-item active">
+            <div class="container">
+               <div class="carousel-caption relative">
+                  <div class="bg_white">
+                     <h1>The all new C<span class="yello">a</span>mJaira Rental Services System</h1>
+                     <p>Start by browsing a room and setting an appointment directly with the owner after selecting the
+                        rooms you are interested in renting in. Without the hassle of physical interaction, with just
+                        one click, our company will immediately answer to you</p>
+                  </div>
+                  <a class="read_more ban_btn" href="/services/">Read More</a>
+               </div>
+            </div>
+         </div>
+         <div class="carousel-item">
+            <div class="container">
+               <div class="carousel-caption relative">
+                  <div class="bg_white">
+                     <h1>Where are you going this week, C<span class="yello">a</span>mJaira can get you covered.</h1>
+                     <p>We created a flexible search system to help filter your queries.</p>
+                  </div>
+                  <a class="read_more ban_btn" href="/list-room/">Read More</a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+         <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+         <span class="carousel-control-next-icon" aria-hidden="true"></span>
+         <span class="sr-only">Next</span>
+      </a>
+   </div>
+</div>
+<!-- end slider section -->
+
+<!-- six_box-->
+<div id="about">
+   <style>
+      .wave-divider {
+         transform: translateY(-12vh);
+      }
+
+      .wave-divider svg {
+         position: relative;
+         display: block;
+         width: 100%;
+         height: 40vh;
+         margin-block: -1px;
+         padding: 0;
+      }
+   </style>
+   <div class="wave-divider">
+      <svg id="visual" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+         <path
+            d="M0 89L55.5 84.5C111 80 222 71 333.2 68.2C444.3 65.3 555.7 68.7 666.8 64C778 59.3 889 46.7 1000 44.8C1111 43 1222 52 1333.2 50.7C1444.3 49.3 1555.7 37.7 1666.8 31.2C1778 24.7 1889 23.3 1944.5 22.7L2000 22L2000 101L1944.5 101C1889 101 1778 101 1666.8 101C1555.7 101 1444.3 101 1333.2 101C1222 101 1111 101 1000 101C889 101 778 101 666.8 101C555.7 101 444.3 101 333.2 101C222 101 111 101 55.5 101L0 101Z"
+            fill="#ec2020" stroke-linecap="round" stroke-linejoin="miter"></path>
+         <path transform="translate(0,101)"
+            d="M0 251L66.7 239.2C133.3 227.3 266.7 203.7 400 182.8C533.3 162 666.7 144 800 167C933.3 190 1066.7 254 1200 242C1333.3 230 1466.7 142 1600 150.8C1733.3 159.7 1866.7 265.3 1933.3 318.2L2000 371L2000 0L1933.3 0C1866.7 0 1733.3 0 1600 0C1466.7 0 1333.3 0 1200 0C1066.7 0 933.3 0 800 0C666.7 0 533.3 0 400 0C266.7 0 133.3 0 66.7 0L0 0Z"
+            fill="#ffd413"></path>
+         <path transform="translate(0,100)"
+            d="M0 189L66.7 173C133.3 157 266.7 125 400 125.3C533.3 125.7 666.7 158.3 800 175.2C933.3 192 1066.7 193 1200 170.3C1333.3 147.7 1466.7 101.3 1600 75.3C1733.3 49.3 1866.7 43.7 1933.3 40.8L2000 38L2000 0L1933.3 0C1866.7 0 1733.3 0 1600 0C1466.7 0 1333.3 0 1200 0C1066.7 0 933.3 0 800 0C666.7 0 533.3 0 400 0C266.7 0 133.3 0 66.7 0L0 0Z"
+            fill="#ec2020"></path>
+      </svg>
+   </div>
+   <div class="container">
+      <div class="row">
+         <div class="col-sm-12">
+            <div class="titlepage">
+               <h2>About us</h2>
+               <p>Based in Taguig with clients & team members all over Manila </p>
+            </div>
+         </div>
+         <div class=" col-sm-12">
+            <div class="about_box">
+               <div class="row d_flex">
+                  <div class="col-md-5">
+                     <div class="about_box_text">
+                        <h3>CamJaira Rental Services</h3>
+                        <p>As one of the best Rental Services system. The website is made to further promote and expand
+                           the influence our rentals services can provide.
+                        </p>
+                        <div class="d-flex justify-content-md-start justify-content-center">
+                           <a class="read_more" href="Javascript:void(0)">Read More</a>
+                        </div>
+                     </div>
+                  </div>
+                  <div class=" col-md-7  pppp">
+                     <div class="about_box_img">
+                        <figure><img src="{% static 'images/about_img.png' %}" alt="#" /></figure>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- end six_box-->
+<!-- building -->
+<div class="building">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="titlepage">
+               <h2> A BUILDING IS NOT SOMETHING TO<br><span class="yellow">FINISH<br></span> IT IS SOMETHING TO<br><span
+                     class="yello">START<br></span></h2>
+               <p>CamJaira has always known the importance of buildings, at the surface level they are shelter.
+                  But CamJaira builds rooms not only as a shelter, but as an experience for our customers.
+                  We aren't only building concrete, we also are building relationships.
+               </p>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- end building -->
+<!-- % include 'main/components/roomListFeatured.html' % -->
+
+<div class="services_main">
+   <div class="container my-5">
+      <div class="row">
+         <div class="col-12">
+            {% include 'main/components/roomList.html' %}
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-12 d-flex justify-content-md-start justify-content-center">
+            <a class="read_more mt-5" href="/services/">Browse More</a>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<!-- instant -->
+<div class="instant">
+   <div class="container-fluid w-75 mx-auto">
+      <div class="row">
+         <div class="col-md-6 col-12 d-flex justify-content-md-end justify-content-center">
+            <div class="titlepage text_align_left">
+               <h2>Set an Appointment Today</h2>
+               <p>Start by setting an appointment directly with the owner after selecting the rooms you are
+                  interested
+                  in renting in. Without the hassle of physical interaction, with just one click, our company will
+                  immediately answer to you</p>
+               <div class="w-100 d-flex justify-content-md-start justify-content-center"><a class="read_more"
+                     href="/contact/">Set an Appointment</a>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-6 col-12 d-flex align-items-center">
+            <div class="instant_img">
+               <figure><img src="{% static 'images/pc.png' %}" alt="#" /></figure>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- end instant -->
+{% endblock %}

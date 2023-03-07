@@ -1,0 +1,131 @@
+{% load static %}
+<!-- Room List Component -->
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="titlepage">
+                <h2>Rooms</h2>
+                <span>Explore the different types of rooms we offer</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+
+            <ul class="nav nav-tabs md-tabs border_none d-flex justify-content-md-start justify-content-center"
+                id="myTabMD" role="tablist">
+
+                <li class="nav-item lisertab">
+                    <a class="nav-link servi_tab active" id="studio-tab-md" data-toggle="tab" href="#studio-md"
+                        role="tab" aria-controls="studio-md" aria-selected="true">STUDIO</a>
+                </li>
+
+                <li class="nav-item lisertab">
+                    <a class="nav-link servi_tab" id="single_bed-tab-md" data-toggle="tab" href="#single_bed-md"
+                        role="tab" aria-controls="single_bed-md" aria-selected="false">SINGLE</a>
+                </li>
+
+            </ul>
+
+            <div class="tab-content card back_bg" id="myTabContentMD">
+                <div class="container tab-pane fade show active" id="studio-md" role="tabpanel"
+                    aria-labelledby="studio-tab-md">
+                    <div class="row">
+                        {% for i in rooms.studio %}
+                        {% if forloop.counter > rooms.studioChunkLimit %}
+                        {% if rooms.studioMod == 1 %}
+                        <div class="col-12 d-flex justify-content-center">
+                            {% elif rooms.studioMod == 2 %}
+                            <div class="col-6 p-3 d-flex justify-content-center">
+                                {% elif rooms.studioMod == 3 %}
+                                <div class="col-md-4 col-6 p-3 d-flex justify-content-center">
+                                    {% else %}
+                                    <div class="col-md-3 col-6 p-3 d-flex justify-content-center">
+                                        {% endif %}
+                                        {% else %}
+                                        <div class="col-md-3 col-6 p-3 d-flex justify-content-center">
+                                            {% endif %}
+
+                                            {% if i.image %}
+                                                <div class="card-container"
+                                                    style="background:url({{i.image.url}});background-repeat: no-repeat;background-size: cover;background-position:center;">
+                                            {% else %}
+                                                <div class="card-container"
+                                                    style="background:url({%static 'images/placeholder.png'%});background-repeat: no-repeat;background-size: cover;background-position:center;">
+                                            {% endif %}
+                                                    <div class="overlay">
+                                                        <div class="items"></div>
+                                                        <div class="items card-head">
+                                                            <p>{{i.number}}</p>
+                                                            <hr>
+                                                        </div>
+                                                        <div class="items price">
+                                                            <p class="new">{{i.price}} ₱</p>
+                                                            <p class="new">{{i.size}} m²</p>
+                                                        </div>
+                                                        <div class="items info">
+                                                            <img src="{% static 'icon/info.svg' %}">
+                                                            <a style="color:white;" href="/show-room/{{i.id}}">Learn
+                                                                more</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+
+                                    <div class="container tab-pane fade" id="single_bed-md" role="tabpanel"
+                                        aria-labelledby="single_bed-tab-md">
+                                        <div class="row">
+                                            {% for i in rooms.single %}
+                                            {% if forloop.counter > rooms.singleChunkLimit %}
+                                            {% if rooms.singleMod == 1 %}
+                                            <div class="col-12 d-flex justify-content-center">
+                                                {% elif rooms.singleMod == 2 %}
+                                                <div class="col-6 p-3 d-flex justify-content-center">
+                                                    {% elif rooms.singleMod == 3 %}
+                                                    <div class="col-md-4 col-6 p-3 d-flex justify-content-center">
+                                                        {% else %}
+                                                        <div class="col-md-3 col-6 p-3 d-flex justify-content-center">
+                                                            {% endif %}
+                                                            {% else %}
+                                                            <div
+                                                                class="col-md-3 col-6 p-3 d-flex justify-content-center">
+                                                                {% endif %}
+
+                                                                {% if i.image %}
+                                                                    <div class="card-container"
+                                                                        style="background:url({{i.image.url}});background-repeat: no-repeat;background-size: cover;background-position:center;">
+                                                                {% else %}
+                                                                    <div class="card-container"
+                                                                        style="background:url({%static 'images/placeholder.png'%});background-repeat: no-repeat;background-size: cover;background-position:center;">
+                                                                {% endif %}
+                                                                        <div class="overlay">
+                                                                            <div class="items"></div>
+                                                                            <div class="items card-head">
+                                                                                <p>{{i.number}}</p>
+                                                                                <hr>
+                                                                            </div>
+                                                                            <div class="items price">
+                                                                                <p class="new">{{i.price}} ₱</p>
+                                                                                <p class="new">{{i.size}} m²</p>
+                                                                            </div>
+                                                                            <div class="items info">
+                                                                                <img src="{% static 'icon/info.svg' %}">
+                                                                                <a style="color:white;"
+                                                                                    href="/show-room/{{i.id}}">Learn
+                                                                                    more</a>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>

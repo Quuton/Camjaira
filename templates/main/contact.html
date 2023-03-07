@@ -1,0 +1,41 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+{% block content %}
+<div class="container-fluid contact w-75">
+    <div class="container my-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12">
+                <div class="titlepage p-0 text-md-left text-center">
+                    <h2>Register An Appointment</h2>
+                </div>
+            </div>
+
+        </div>
+        <div class="row my-5">
+            <div class="col-12 d-flex justify-content-center">
+                <form class="main_form w-100" method="post" action="/contact/" id="appointment">
+                    {% csrf_token %}
+                    <input class="form-control" placeholder="Name" type="text" name="name">
+                    <input class="form-control" placeholder="Email" type="email" name="email">
+                    <input class="form-control" placeholder="Topic" type="text" name="topic">
+                    <textarea class="form-control" placeholder="Write your message..." type="text"
+                        name="message"></textarea>
+                    <button class="send">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% if appointmentSaveStatus %}
+    <div class="row text-center">
+        <div class="col-12">
+            <h2>Appointment successfully booked!</h2>
+        </div>
+    </div>
+    {% endif %}
+    
+</div>
+
+{% endblock %}
