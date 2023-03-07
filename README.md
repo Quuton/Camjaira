@@ -7,30 +7,28 @@ Before you can use the camjaira webserver, you need the following things.
 1. Python 3.11 or newer
 2. A venv with django and pillow libraries
 
-## BASIC USAGE
-Once the setup is done, you can use it rightaway
-## BASIC USAGE
+## Basic usage
 Once the setup is done, you can use it rightaway
 
-### RUN LOCALLY ON MACHINE
+### Run locally
 
 ```
 python camjaira/manage.py runserver
 ```
 
-### RUN ON LOCAL NETWORK
+### Run on the local network
 
 ```
 python camjaira/manage.py runserver 0.0.0.0:8000
 ```
 
-### RESET THE DATABASE
+### Reset the database
 
 ```
 python camjaira/manage.py flush
 ```
 
-### CREATE ADMIN ACCOUNT
+### Create a superuser
 
 ```
 python camjaira/manage.py createsuperuser
