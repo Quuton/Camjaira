@@ -13,7 +13,7 @@ Delete it if it is in the project, you have to make your own.
 
 Open the terminal or powershell in the project and make a venv:
 
-    ```python -m venv venv```
+`python -m venv venv`
 
 ! INSTALLING LIBRARIES ONTO THE VENV
 Next you need to install the new libraries, before that, activate the venv first:
