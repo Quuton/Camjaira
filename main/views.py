@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.contrib import auth
 from .utility import *
 
+
+
 mainPath = 'main/'
 # ALL CODE BELOW IS STILL FOR TESTING, NO FINAL COMMITMENT
 
@@ -19,7 +21,7 @@ def test(request):
     return render(request, mainPath + 'test.html/', context=context)
 
 
-def listRoom(request):
+def roomList(request):
     data = None
 
     # Prevent empty strings so we can convert to float
@@ -152,7 +154,7 @@ def deleteRoom(request, id: int):
     return redirect('/services')
 
 
-def editRoom(request, id: int):
+def roomEdit(request, id: int):
     status = False
     if request.method == "POST" and request.user.is_authenticated:
         data = {
@@ -186,7 +188,7 @@ def editRoom(request, id: int):
     else:
         return render(request, mainPath + 'forbidden.html', context=None)
 
-def createRoom(request):
+def roomCreate(request):
     context = {
         'recent': getRecentPosts(),
     }
@@ -205,7 +207,7 @@ def createRoom(request):
         return redirect('/services/')
 
     if request.user.is_authenticated:
-        return render(request, mainPath + 'createRoom.html', context=context)
+        return render(request, mainPath + 'roomCreate.html', context=context)
     else:
         return render(request, mainPath + 'forbidden.html', context=None)
 
@@ -242,3 +244,14 @@ def roomDetail(request, id: int):
     }
 
     return render(request, mainPath + 'roomDetail.html', context=context)
+
+def registerUser(request):
+    context = {
+        'recent': getRecentPosts(),
+    }
+
+    if request.method == 'POST':
+        register(request.POST, request.FILES['avatar'])
+        return redirect('/')
+    else:
+        return render(request, mainPath + 'registerUser.html', context=context)
