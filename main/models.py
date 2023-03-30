@@ -59,3 +59,7 @@ class Suggestion(models.Model):
     userID = models.ForeignKey(User, on_delete=models.CASCADE)
     timeStamp = models.DateTimeField(auto_now = True)
     resolved = models.BooleanField(default = False)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField()

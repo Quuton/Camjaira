@@ -18,8 +18,9 @@ urlpatterns = [
     path('resolve-appointment/<int:id>', views.resolveAppointment),
     path('delete-room/<int:id>', views.deleteRoom),
     path('show-room/<int:id>', views.roomDetail),
-    path('edit-room/<int:id>', views.editRoom),
-    path('create-room/', views.createRoom),
-    path('list-room/', views.listRoom),
+    path('edit-room/<int:id>', views.roomEdit),
+    path('create-room/', views.roomCreate),
+    path('list-room/', views.roomList),
+    path('register', views.registerUser),
     path('', views.home),
 ]

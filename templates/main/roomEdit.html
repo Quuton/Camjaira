@@ -10,7 +10,7 @@
         image.src = URL.createObjectURL(event.target.files[0]);
     };
 </script>
-<form class="container my-5 detail" id="editRoomForm" method="post" action="/edit-room/{{room.id}}"
+<form class="container my-5 detail" id="roomEditForm" method="post" action="/edit-room/{{room.id}}"
     enctype="multipart/form-data">
     <input type="hidden" name="roomID" value="{{room.id}}">
     {% csrf_token %}
@@ -108,7 +108,7 @@
             class="col-12 align-items-md-start justify-content-md-start text-md-left align-items-center justify-content-center text-center">
             <h2 class="my-5">Actions</h2>
             <div class="d-inline-block" title="Edit">
-                <button type="submit" value="submit" form="editRoomForm" class="btn btn-success px-1 mx-1">
+                <button type="submit" value="submit" form="roomEditForm" class="btn btn-success px-1 mx-1">
                     <img style="width:100%;height:auto" class="control-button" src="{% static 'icon/done.svg'%}">
                 </button>
             </div>

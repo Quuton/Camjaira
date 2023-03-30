@@ -1,6 +1,7 @@
 from .models import *
 import math
 import itertools as it
+from django.contrib.auth.models import Group
 
 def testFunction(n:int):
     for i in range(0,n):
@@ -124,3 +125,16 @@ def resolveAppointmentRecord(id:int):
 def getRoomImage(id:int):
     temp = Room.objects.get(id = id)
     return temp.image
+
+def register(data:dict, picture):
+    username = data['email']
+    first_name = data['firstname']
+    last_name = data['lastname']
+    email = data['email']
+    password = data['password']
+    avatar = picture
+    user = User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)
+    group = Group.objects.get(name='User')
+    user.groups.add(group)
+    profile = UserProfile(user=user, avatar=avatar)
+    profile.save()

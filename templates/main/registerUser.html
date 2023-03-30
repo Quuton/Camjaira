@@ -1,0 +1,36 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Post suggestion ok{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_username">Username</label>
+        <input type="text" name="username" id="id_username" required>
+    </div>
+    <div class="form-group">
+        <label for="id_password">Password</label>
+        <input type="password" name="password" id="id_password" required>
+    </div>
+    <div class="form-group">
+        <label for="id_firstname">firstname</label>
+        <input type="text" name="firstname" id="id_firstname" required>
+    </div>
+    <div class="form-group">
+        <label for="id_lastname">lastname</label>
+        <input type="text" name="lastname" id="id_lastname" required>
+    </div>
+    <div class="form-group">
+        <label for="id_email">Email address</label>
+        <input type="email" name="email" id="id_email" required>
+    </div>
+    <div class="form-group">
+        <label for="id_avatar">Avatar</label>
+        <input accept="image/*" type='file' name="avatar" id="id_avatar">
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+{% endblock %}
