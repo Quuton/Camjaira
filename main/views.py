@@ -26,9 +26,6 @@ def test(request):
 
     return render(request, mainPath + 'test.html/', context=context)
 
-def userPage(request):
-    pass
-
 def roomList(request):
     data = None
 
@@ -255,3 +252,20 @@ def registerUser(request):
         return redirect('/')
     else:
         return render(request, mainPath + 'registerUser.html', context=context)
+
+def userPage(request):
+    userGroup = None
+    if request.user.groups.all():
+        userGroup = request.user.groups.all()[0]
+    else:
+        return redirect('/login')
+
+    context = {
+        'recent': getRecentPosts(),
+        'accountType': userGroup,
+        'superUser': request.user.is_superuser,
+        'picture': getUserPicture(request.user.id),
+        'userid': request.user.id,
+        'username':request.user.username,
+    }
+    return render(request, mainPath + 'userPage.html/', context=context)

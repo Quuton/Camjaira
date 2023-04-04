@@ -1,0 +1,19 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %} User Page {% endblock %}
+
+{% block content %}
+<h1>THIS IS ALSO A TEST PAGE, DO NOT USE IN PROD diaonwdaiodaiodawiodwja</h1>
+<h2>Account type: {{ accountType }}</h2>
+
+<h2>Superuser?: {{ superUser }}</h2>
+
+<img style="width:100px;height:auto;object-fit:cover" id="roomFormImage" src="{{picture.url}}"
+                alt="your image" />
+<h2>Img src: {{picture.url}}</h2>
+<H3>UserID: {{userid}}</H3>
+<H3>UserName: {{username}}</H3>
+<h1>daiondoaaondaond</h1>
+
+{% endblock %}
