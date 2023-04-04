@@ -22,5 +22,6 @@ urlpatterns = [
     path('create-room/', views.roomCreate),
     path('list-room/', views.roomList),
     path('register', views.registerUser),
+    path('user', views.userPage),
     path('', views.home),
 ]

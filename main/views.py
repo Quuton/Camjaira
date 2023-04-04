@@ -3,37 +3,35 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib import auth
+from .modelInterface import *
 from .utility import *
 
-
-
 mainPath = 'main/'
-# ALL CODE BELOW IS STILL FOR TESTING, NO FINAL COMMITMENT
 
 
 def test(request):
+    userGroup = None
+    if request.user.groups.all():
+        userGroup = request.user.groups.all()[0]
+    
     context = {
         'recent': getRecentPosts(),
+        'accountType': userGroup,
+        'superUser': request.user.is_superuser,
+        'picture': getUserPicture(request.user.id),
+        'userid': request.user.id,
+        'username':request.user.username,
     }
 
-    testFunction(10)
 
     return render(request, mainPath + 'test.html/', context=context)
-
 
 def roomList(request):
     data = None
 
-    # Prevent empty strings so we can convert to float
-    if request.GET.get('priceMin', '0') != '' and request.GET.get('priceMin', '0').isnumeric():
-        priceMin = float(request.GET.get('priceMin', '0'))
-    else:
-        priceMin = 0.0
+    priceMin = parseFloat(request.GET.get('priceMin', '0'))
+    priceMax = parseFloat(request.GET.get('priceMax', '0'))
 
-    if request.GET.get('priceMax', '0') != '' and request.GET.get('priceMax', '0').isnumeric():
-        priceMax = float(request.GET.get('priceMax', '0'))
-    else:
-        priceMax = 0.0
 
     if request.method == 'GET':
         data = {
@@ -50,7 +48,6 @@ def roomList(request):
             'rooms': getRooms(data),
         }
 
-    print(f'data is {data}')
     return render(request, mainPath + 'roomTable.html', context=context)
 
 
@@ -255,3 +252,20 @@ def registerUser(request):
         return redirect('/')
     else:
         return render(request, mainPath + 'registerUser.html', context=context)
+
+def userPage(request):
+    userGroup = None
+    if request.user.groups.all():
+        userGroup = request.user.groups.all()[0]
+    else:
+        return redirect('/login')
+
+    context = {
+        'recent': getRecentPosts(),
+        'accountType': userGroup,
+        'superUser': request.user.is_superuser,
+        'picture': getUserPicture(request.user.id),
+        'userid': request.user.id,
+        'username':request.user.username,
+    }
+    return render(request, mainPath + 'userPage.html/', context=context)
