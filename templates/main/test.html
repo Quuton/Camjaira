@@ -4,21 +4,23 @@
 {% block title %}Sexy{% endblock %}
 
 {% block content %}
-<h2>
-Account type: {{ accountType }}
-</h2>
+
+<h2>UserID: {{userid}}</H2>
+<h2>UserName: {{username}}</h2>
 
 <h2>
-Superuser?: {{ superUser }}
+Main Account type: {{ accountType }}
 </h2>
 
-<!-- <ol>
-    <li>Username: {{username}}</li>
-    <li>First name: {{firstname}}</li>
-</ol> -->
-<img style="width:100px;height:auto;object-fit:cover" id="roomFormImage" src="{{picture.url}}"
-                alt="your image" />
+<ul>
+    <li>isUser? {{isUser}}</li>
+    <li>isOwner? {{isOwner}}</li>
+    <li>isAdmin? {{isAdmin}}</li>
+</ul>
+
+<h2>Profile Picture: <img style="max-width:200px;height:auto;object-fit:cover" id="roomFormImage" src="{{picture.url}}"
+    alt="your image" /></h2>
+
 <h2>Img src: {{picture.url}}</h2>
-<H3>{{userid}}</H3>
-<H3>{{username}}</H3>
+
 {% endblock %}

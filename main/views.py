@@ -10,6 +10,9 @@ mainPath = 'main/'
 
 
 def test(request):
+    # The test function is used to test any new feature i add
+    # It makes it easier since i have one dedicated test page
+
     userGroup = None
     if request.user.groups.all():
         userGroup = request.user.groups.all()[0]
@@ -21,20 +24,23 @@ def test(request):
         'picture': getUserPicture(request.user.id),
         'userid': request.user.id,
         'username':request.user.username,
+        'isUser': isUser(request),
+        'isAdmin': isAdmin(request),
+        'isOwner': isOwner(request),
     }
 
 
     return render(request, mainPath + 'test.html/', context=context)
 
 def roomList(request):
-    data = None
+    queryData = None
 
     priceMin = parseFloat(request.GET.get('priceMin', '0'))
     priceMax = parseFloat(request.GET.get('priceMax', '0'))
 
 
     if request.method == 'GET':
-        data = {
+        queryData = {
             'query': request.GET.get('query', ''),
             'queryType': request.GET.get('queryType', 'type'),
             'priceMin': priceMin,
@@ -45,7 +51,7 @@ def roomList(request):
 
         context = {
             'recent': getRecentPosts(),
-            'rooms': getRooms(data),
+            'rooms': getRooms(queryData),
         }
 
     return render(request, mainPath + 'roomTable.html', context=context)

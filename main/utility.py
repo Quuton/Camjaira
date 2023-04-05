@@ -7,8 +7,11 @@ def parseFloat(number:str):
     except:
         return .0
 
-def isUser():
-    pass
+def isUser(request):
+    return request.user.groups.filter(name='User').exists()
 
-def isOwner():
-    pass
+def isOwner(request):
+    return request.user.groups.filter(name='Owner').exists()
+
+def isAdmin(request):
+    return request.user.is_superuser
