@@ -1,14 +1,15 @@
 # Handles direct transactions between the DB
 from .models import *
+import random
 import itertools as it
 from django.contrib.auth.models import Group
-
-def testFunction(n:int):
+from django.db.models import Avg
+def generateRoomData(n:int):
     for i in range(0,n):
-        newRoomObj = Room(number = 'testobj' + str(i), description = 'Test description', floor = i, image = 'room_images/Draco.png', size = 200, price = 69420, availability = True, type = 'Single')
+        newRoomObj = Room(number = 'testobj' + str(i), description = 'Test description', floor = i, image = 'room_images/Draco.png', size = random.randint(0,200), price = random.randint(0,2000), availability = True, type = 'Single')
         newRoomObj.save()
     for i in range(0,n):
-        newRoomObj = Room(number = 'testobj' + str(i), description = 'Test description', floor = i, image = 'room_images/Draco.png', size = 200, price = 69420, availability = True, type = 'Studio')
+        newRoomObj = Room(number = 'testobj' + str(i), description = 'Test description', floor = i, image = 'room_images/Draco.png', size = random.randint(0,200), price = random.randint(0,2000), availability = True, type = 'Studio')
         newRoomObj.save()
 
 def getRecentPosts(max_posts:int = 4):
@@ -139,6 +140,19 @@ def register(data:dict, picture):
     profile = UserProfile(user=user, avatar=avatar)
     profile.save()
 
-def getUserPicture(id:int):
-    userPicture = UserProfile.objects.get(user = id).avatar
-    return userPicture
+def getUserPicture(userID:int):
+    try:
+        userPicture = UserProfile.objects.get(user = userID).avatar
+        return userPicture
+    except:
+        return None
+    
+def getReviews(roomID:int):
+    reviewList = Review.objects.filter(roomID = roomID)
+    return reviewList
+
+def getReviewAverageScores(roomID:int):
+    return Review.objects.filter(roomID = roomID).aggregate(Avg('cleanlinessRating'), Avg('aestheticRating'), Avg('comfortRating'), Avg('valueRating'))
+    
+def postReview():
+    pass

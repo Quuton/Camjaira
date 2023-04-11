@@ -4,16 +4,37 @@
 {% block title %} User Page {% endblock %}
 
 {% block content %}
-<h1>THIS IS ALSO A TEST PAGE, DO NOT USE IN PROD diaonwdaiodaiodawiodwja</h1>
-<h2>Account type: {{ accountType }}</h2>
+<div class = "container-fluid my-5">
+    <div class="row">
+        <h1>User test page</h1>
+    </div>
 
-<h2>Superuser?: {{ superUser }}</h2>
+    <div class="row">
+        <div class="col-12">
+            <h2>Main Account group: {{ accountType }}</h2>
+        </div>
+        <div class="col-12">
+            <li>isUser? {{isUser}}</li>
+            <li>isOwner? {{isOwner}}</li>   
+            <li>isAdmin? {{isAdmin}}</li>   
+        </div>
+    </div>
 
-<img style="width:100px;height:auto;object-fit:cover" id="roomFormImage" src="{{picture.url}}"
-                alt="your image" />
-<h2>Img src: {{picture.url}}</h2>
-<H3>UserID: {{userid}}</H3>
-<H3>UserName: {{username}}</H3>
-<h1>daiondoaaondaond</h1>
+    <div class="row my-5">
+        <div class="col-6">
+            <ul>
+                <li><H1>UserID: {{userid}}</H1></li>
+                <li><H1>UserName: {{username}}</H1></li>
+            </ul>
+        </div>
+
+        <div class="col-6 justfiy-content-center">
+            <img style="width:40%;height:auto;object-fit:cover;" id="roomFormImage" src="{{picture.url}}"
+            alt="your image" />
+        </div>
+    </div>
+    
+</div>
+
 
 {% endblock %}

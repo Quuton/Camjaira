@@ -60,6 +60,8 @@ class Suggestion(models.Model):
     timeStamp = models.DateTimeField(auto_now = True)
     resolved = models.BooleanField(default = False)
 
+# This class acts as an extension to Django's built in user
+# For now, it provides a way to store profile pictures.
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField()
+    avatar = models.ImageField(upload_to='user_profile_images', blank = True)

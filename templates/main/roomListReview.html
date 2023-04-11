@@ -1,0 +1,35 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Sexy{% endblock %}
+
+{% block content %}
+
+<table style="width:90%; margin-inline:auto">
+    <tr>
+        <th>Review Scores</th>
+        <th>Comment</th>
+        <th>Posting User</th>
+    </tr>
+
+    {% for i in reviewList %}
+    <tr>
+        <td>
+            <ul>
+                <li>cleanlinessRating: {{i.cleanlinessRating}}</li>
+                <li>aestheticRating: {{i.aestheticRating}}</li>
+                <li>comfortRating: {{i.comfortRating}}</li>
+                <li>valueRating: {{i.valueRating}}</li>
+            </ul>
+        </td>
+        <td>
+            {{i.comment}}
+        </td>
+        <td>
+            Posting UserID: {{i.userID}}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

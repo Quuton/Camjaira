@@ -66,6 +66,8 @@ def services(request):
 
     return render(request, mainPath + 'services.html', context=context)
 
+def forbidden(request):
+    return render(request, mainPath + 'forbidden.html', context=None)
 
 def home(request):
     context = {
@@ -87,23 +89,28 @@ def login(request):
 
 def contact(request):
     status = False
-    if request.method == "POST":
-        data = {
-            "name": request.POST['name'],
-            "email": request.POST['email'],
-            "topic": request.POST['topic'],
-            "message": request.POST['message'],
-            "ipAddress": request.META.get("REMOTE_ADDR"),
-        }
-        addAppointmentRecord(data)
-        status = True
+    if isUser(request):
+        if request.method == "POST":
+            data = {
+                "name": request.POST['name'],
+                "email": request.POST['email'],
+                "topic": request.POST['topic'],
+                "message": request.POST['message'],
+                "ipAddress": request.META.get("REMOTE_ADDR"),
+            }
+            addAppointmentRecord(data)
+            status = True
 
-    context = {
-        'recent': getRecentPosts(),
-        'appointmentSaveStatus': status,
-    }
+        else:
+            context = {
+                'recent': getRecentPosts(),
+                'appointmentSaveStatus': status,
+            }
+            
+        return render(request, mainPath + 'contact.html', context=context)
+    else:
+        return redirect('/login')
 
-    return render(request, mainPath + 'contact.html', context=context)
 
 
 def about(request):
@@ -116,7 +123,7 @@ def about(request):
 
 
 def appointments(request):
-    if request.method == 'GET' and request.user.is_authenticated:
+    if request.method == 'GET' and isOwner(request):
         print(request.GET.get('showResolved', 'off'))
         if request.GET.get('showResolved', 'off') == 'on':
             context = {
@@ -132,9 +139,9 @@ def appointments(request):
                 'appointments': getAppointments(False),
                 'appointmentParams': request.GET,
             }
-        return render(request, mainPath + 'appointments.html', context=context)
+            return render(request, mainPath + 'appointments.html', context=context)
     else:
-        return render(request, mainPath + 'forbidden.html', context=None)
+        return redirect('/forbidden')
 
 
 def deleteAppointment(request, id: int):
@@ -244,6 +251,7 @@ def roomDetail(request, id: int):
     context = {
         'recent': getRecentPosts(),
         'room': getRoom(id),
+        'averages':getReviewAverageScores(id),
     }
 
     return render(request, mainPath + 'roomDetail.html', context=context)
@@ -273,5 +281,15 @@ def userPage(request):
         'picture': getUserPicture(request.user.id),
         'userid': request.user.id,
         'username':request.user.username,
+        'isUser': isUser(request),
+        'isAdmin': isAdmin(request),
+        'isOwner': isOwner(request),
     }
     return render(request, mainPath + 'userPage.html/', context=context)
+
+def roomListReview(request, id: int):
+
+    context = {'recent':getRecentPosts(),
+                'reviewList':getReviews(id)}
+
+    return render(request, mainPath + 'roomListReview.html/', context=context)
