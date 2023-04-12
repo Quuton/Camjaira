@@ -5,7 +5,9 @@ Pretty ok django project for school
 Before you can use the camjaira webserver, you need the following things.
 
 1. Python 3.11 or newer
-2. A venv with django and pillow libraries
+2. Django and pillow libraries
+
+You can use `pip install Django, pillow` to install into your venv.
 
 ## Basic usage
 Once the setup is done, you can use it rightaway
@@ -16,7 +18,7 @@ Once the setup is done, you can use it rightaway
 python camjaira/manage.py runserver
 ```
 
-### Run on the local network
+### Run on the local network(use your phone to view)
 
 ```
 python camjaira/manage.py runserver 0.0.0.0:8000
