@@ -65,6 +65,30 @@ def getRoom(id:int):
     
     return Room.objects.get(id = id)
 
+def saveRoomRecord(data:dict, id:int = None):
+    if id == None:
+        RoomObject = Room ( 
+            number = data.get('number'),
+            description = data.get('description'),
+            price = data.get('price', 0),
+            size = data.get('size', 0),
+            type = data.get('type', 'Studio'),
+            floor = data.get('floor', 1),
+            availability = data.get('availability', True),
+            image = data.get('image'))
+    else:
+        RoomObject = Room.objects.get(id = id)
+        RoomObject.number = data.get('number')
+        RoomObject.description = data.get('description')
+        RoomObject.price = data.get('price', 0)
+        RoomObject.size = data.get('size', 0)
+        RoomObject.type = data.get('type', 'Studio')
+        RoomObject.floor = data.get('floor', 1)
+        RoomObject.availability = data.get('availability', True)
+        RoomObject.image = data.get('image')
+
+    RoomObject.save()
+
 def getAppointments(showResolved = False):
     if showResolved :
         return Appointment.objects.all().order_by('-timeStamp')
@@ -79,30 +103,6 @@ def addAppointmentRecord(data:dict):
         message = data['message'],
         ipAddress = data['ipAddress'])
     AppointmentObject.save()
-
-def saveRoomRecord(data:dict, id:int = None):
-    if id == None:
-        RoomObject = Room ( 
-            number = data['number'],
-            description = data['description'],
-            price = data['price'],
-            size = data['size'],
-            type = data['type'],
-            floor = data['floor'],
-            availability = data['availability'],
-            image = data['image'])
-    else:
-        RoomObject = Room.objects.get(id = id)
-        RoomObject.number = data['number']
-        RoomObject.description = data['description']
-        RoomObject.price = data['price']
-        RoomObject.size = data['size']
-        RoomObject.type = data['type']
-        RoomObject.floor = data['floor']
-        RoomObject.availability = data['availability']
-        RoomObject.image = data['image']
-
-    RoomObject.save()
 
 def deleteAppointmentRecord(id:int):
     Appointment.objects.filter(id = id).delete()
