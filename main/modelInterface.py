@@ -35,8 +35,6 @@ def getRooms(queryData:dict = None):
     else:
         querySet = Room.objects.all().order_by('-' + queryData['orderField'])
     
-    print(f'query process part 1: {querySet}')
-
     # If for whatever goddamn reason or magic query is None instead of an empty string, this prevents that
     if queryData['query'] == None:
         queryData['query'] = ''
