@@ -49,16 +49,13 @@ def getRooms(queryData:dict = None):
         elif queryData['queryType'] == 'number':
             querySet = querySet.filter(number = queryData['query'])
     
-    print(f'query process part 2: {querySet}')
 
     querySet = querySet.filter(price__gte = queryData['priceMin'])
 
-    print(f'query process part 3: {querySet}')
 
     if queryData['priceMax'] != 0:
         querySet = querySet.filter(price__lte = queryData['priceMax'])
         
-    print(f'query process part 4: {querySet}')
     return querySet
 
         
