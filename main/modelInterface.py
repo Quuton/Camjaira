@@ -69,7 +69,7 @@ def saveRoomRecord(data:dict, id:int = None):
     if id == None:
         RoomObject = Room ( 
             number = data.get('number'),
-            description = data.get('description'),
+            description = data.get('description', ''),
             price = data.get('price', 0),
             size = data.get('size', 0),
             type = data.get('type', 'Studio'),
@@ -77,17 +77,23 @@ def saveRoomRecord(data:dict, id:int = None):
             availability = data.get('availability', True),
             image = data.get('image'))
     else:
-        RoomObject = Room.objects.get(id = id)
-        RoomObject.number = data.get('number')
-        RoomObject.description = data.get('description')
-        RoomObject.price = data.get('price', 0)
-        RoomObject.size = data.get('size', 0)
-        RoomObject.type = data.get('type', 'Studio')
-        RoomObject.floor = data.get('floor', 1)
-        RoomObject.availability = data.get('availability', True)
-        RoomObject.image = data.get('image')
+        try:
+            RoomObject = Room.objects.get(id = id)
+            RoomObject.number = data.get('number', RoomObject.number)
+            RoomObject.description = data.get('description', RoomObject.description)
+            RoomObject.price = data.get('price', RoomObject.price)
+            RoomObject.size = data.get('size', RoomObject.size)
+            RoomObject.type = data.get('type', RoomObject.type)
+            RoomObject.floor = data.get('floor', RoomObject.floor)
+            RoomObject.availability = data.get('availability', RoomObject.availability)
+            RoomObject.image = data.get('image', RoomObject.image)
+        except Room.DoesNotExists:
+            return None
+        
 
     RoomObject.save()
+
+    return RoomObject
 
 def getAppointments(showResolved = False):
     if showResolved :

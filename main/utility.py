@@ -15,3 +15,11 @@ def isOwner(request):
 
 def isAdmin(request):
     return request.user.is_superuser
+
+def getRelevantAttributes(obj):
+    excluded_keys = 'created', '_state', 'timestamp', 'user', 'uid', 'changed'
+    filtered = {}
+    for i, j in obj.__dict__.items():
+        if i not in excluded_keys:
+            filtered.update({i:j})
+    return filtered
