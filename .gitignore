@@ -1,4 +1,4 @@
 *.pdf
 venv/
-__pycache__/
 static_root/
+__pycache__/

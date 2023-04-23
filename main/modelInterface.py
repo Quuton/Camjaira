@@ -35,8 +35,6 @@ def getRooms(queryData:dict = None):
     else:
         querySet = Room.objects.all().order_by('-' + queryData['orderField'])
     
-    print(f'query process part 1: {querySet}')
-
     # If for whatever goddamn reason or magic query is None instead of an empty string, this prevents that
     if queryData['query'] == None:
         queryData['query'] = ''
@@ -49,16 +47,13 @@ def getRooms(queryData:dict = None):
         elif queryData['queryType'] == 'number':
             querySet = querySet.filter(number = queryData['query'])
     
-    print(f'query process part 2: {querySet}')
 
     querySet = querySet.filter(price__gte = queryData['priceMin'])
 
-    print(f'query process part 3: {querySet}')
 
     if queryData['priceMax'] != 0:
         querySet = querySet.filter(price__lte = queryData['priceMax'])
         
-    print(f'query process part 4: {querySet}')
     return querySet
 
         
@@ -69,6 +64,36 @@ def getRoom(id:int):
     temp.save()
     
     return Room.objects.get(id = id)
+
+def saveRoomRecord(data:dict, id:int = None):
+    if id == None:
+        RoomObject = Room ( 
+            number = data.get('number'),
+            description = data.get('description', ''),
+            price = data.get('price', 0),
+            size = data.get('size', 0),
+            type = data.get('type', 'Studio'),
+            floor = data.get('floor', 1),
+            availability = data.get('availability', True),
+            image = data.get('image'))
+    else:
+        try:
+            RoomObject = Room.objects.get(id = id)
+            RoomObject.number = data.get('number', RoomObject.number)
+            RoomObject.description = data.get('description', RoomObject.description)
+            RoomObject.price = data.get('price', RoomObject.price)
+            RoomObject.size = data.get('size', RoomObject.size)
+            RoomObject.type = data.get('type', RoomObject.type)
+            RoomObject.floor = data.get('floor', RoomObject.floor)
+            RoomObject.availability = data.get('availability', RoomObject.availability)
+            RoomObject.image = data.get('image', RoomObject.image)
+        except Room.DoesNotExists:
+            return None
+        
+
+    RoomObject.save()
+
+    return RoomObject
 
 def getAppointments(showResolved = False):
     if showResolved :
@@ -84,30 +109,6 @@ def addAppointmentRecord(data:dict):
         message = data['message'],
         ipAddress = data['ipAddress'])
     AppointmentObject.save()
-
-def saveRoomRecord(data:dict, id:int = None):
-    if id == None:
-        RoomObject = Room ( 
-            number = data['number'],
-            description = data['description'],
-            price = data['price'],
-            size = data['size'],
-            type = data['type'],
-            floor = data['floor'],
-            availability = data['availability'],
-            image = data['image'])
-    else:
-        RoomObject = Room.objects.get(id = id)
-        RoomObject.number = data['number']
-        RoomObject.description = data['description']
-        RoomObject.price = data['price']
-        RoomObject.size = data['size']
-        RoomObject.type = data['type']
-        RoomObject.floor = data['floor']
-        RoomObject.availability = data['availability']
-        RoomObject.image = data['image']
-
-    RoomObject.save()
 
 def deleteAppointmentRecord(id:int):
     Appointment.objects.filter(id = id).delete()
