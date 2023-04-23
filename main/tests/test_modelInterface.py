@@ -71,8 +71,20 @@ class RoomQueryTest(TestCase):
         queryData = {'query': '', 'queryType': 'type', 'priceMin': 0, 'priceMax': 0, 'orderField': 'id', 'orderDirection': True}
         rooms = mI.getRooms(queryData)
         self.assertEqual(len(rooms), 6)
-        # self.assertEqual(rooms[0].type, 'Double')
-        # self.assertEqual(rooms[1].type, 'Suite')
+
+        queryData = {'query': '', 'queryType': 'type', 'priceMin': 999999, 'priceMax': 0, 'orderField': 'id', 'orderDirection': True}
+        rooms = mI.getRooms(queryData)
+        self.assertEqual(len(rooms), 0)
+
+        queryData = {'query': '', 'queryType': 'type', 'priceMin': 0, 'priceMax': -1, 'orderField': 'id', 'orderDirection': True}
+        rooms = mI.getRooms(queryData)
+        self.assertEqual(len(rooms), 0)
+
+        queryData = {'query': '', 'queryType': 'type', 'priceMin': 1, 'priceMax': 1000, 'orderField': 'id', 'orderDirection': True}
+        rooms = mI.getRooms(queryData)
+        self.assertEqual(len(rooms), 3)
+        for i in rooms:
+            self.assertTrue(1 <= i.price <= 1000)
 
     def test_getRooms_by_order_field(self):
         # orderDirection = False for Descending
