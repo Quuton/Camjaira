@@ -1,6 +1,5 @@
 # Camjaira Webserver
 Pretty ok django project for school. 
-I learnt fullstack development and how to use github properly
 
 ## Setup
 Before you can use the camjaira webserver, you need the following things.
