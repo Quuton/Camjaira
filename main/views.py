@@ -12,25 +12,20 @@ mainPath = 'main/'
 def test(request):
     # The test function is used to test any new feature i add
     # It makes it easier since i have one dedicated test page
-
-    userGroup = None
-    if request.user.groups.all():
-        userGroup = request.user.groups.all()[0]
     
     context = {
         'recent': getRecentPosts(),
-        'accountType': userGroup,
-        'superUser': request.user.is_superuser,
-        'picture': getUserPicture(request.user.id),
-        'userid': request.user.id,
-        'username':request.user.username,
-        'isUser': isUser(request),
-        'isAdmin': isAdmin(request),
-        'isOwner': isOwner(request),
+        'suggestion':getSuggestions()
     }
 
-
     return render(request, mainPath + 'test.html/', context=context)
+
+def suggestionList(request):
+    context = {
+        'recent': getRecentPosts(),
+        'suggestion':getSuggestions()
+    }
+    return render(request, mainPath + 'suggestionList.html/', context=context)
 
 def roomList(request):
     queryData = None
