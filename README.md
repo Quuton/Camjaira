@@ -4,8 +4,14 @@ Pretty ok django project for school.
 ## Todo List
 - [ ] Implement features
   - [ ] Suggestion Box
+    - [x] Implement posting
+    - [x] Implement viewing
+    - [x] Implement Result filtering
   - [ ] Appointment Rework
   - [ ] Review system
+    - [x] Implement viewing
+    - [ ] Implement posting
+    - [ ] Implement editing review
 - [ ] Write Unittests for modelInterface
   - [x] Room
   - [ ] Appointment

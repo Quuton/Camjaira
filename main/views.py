@@ -12,23 +12,11 @@ mainPath = 'main/'
 def test(request):
     # The test function is used to test any new feature i add
     # It makes it easier since i have one dedicated test page
-
-    userGroup = None
-    if request.user.groups.all():
-        userGroup = request.user.groups.all()[0]
     
     context = {
         'recent': getRecentPosts(),
-        'accountType': userGroup,
-        'superUser': request.user.is_superuser,
-        'picture': getUserPicture(request.user.id),
-        'userid': request.user.id,
-        'username':request.user.username,
-        'isUser': isUser(request),
-        'isAdmin': isAdmin(request),
-        'isOwner': isOwner(request),
+        'suggestion':getSuggestions()
     }
-
 
     return render(request, mainPath + 'test.html/', context=context)
 
@@ -124,22 +112,14 @@ def about(request):
 
 def appointments(request):
     if request.method == 'GET' and isOwner(request):
-        print(request.GET.get('showResolved', 'off'))
-        if request.GET.get('showResolved', 'off') == 'on':
-            context = {
+        showResolved = (request.GET.get('showResolved', 'off') == 'on')
+        context = {
                 'recent': getRecentPosts(),
                 'rooms': getFeaturedRooms(),
-                'appointments': getAppointments(True),
+                'appointments': getAppointments(showResolved),
                 'appointmentParams': request.GET,
             }
-        else:
-            context = {
-                'recent': getRecentPosts(),
-                'rooms': getFeaturedRooms(),
-                'appointments': getAppointments(False),
-                'appointmentParams': request.GET,
-            }
-            return render(request, mainPath + 'appointments.html', context=context)
+        return render(request, mainPath + 'appointments.html', context=context)
     else:
         return redirect('/forbidden')
 
@@ -293,3 +273,36 @@ def roomListReview(request, id: int):
                 'reviewList':getReviews(id)}
 
     return render(request, mainPath + 'roomListReview.html/', context=context)
+
+def suggestionList(request):
+    if request.method == 'GET' and (isOwner(request) or isAdmin(request)):
+        showResolved = (request.GET.get('showResolved', 'off') == 'on')
+        showFavourite = (request.GET.get('showFavourite', 'off') == 'on')
+        context = {
+                'recent': getRecentPosts(),
+                'suggestions': getSuggestions(showResolved, showFavourite),
+            }
+        return render(request, mainPath + 'suggestionList.html', context=context)
+    else:
+        return redirect('/forbidden')
+
+def suggestionCreate(request):
+    context = {'recent':getRecentPosts()}
+
+    if request.method == 'POST' and isUser(request):
+        data = {
+                'topic': request.POST['topic'],
+                'message' :request.POST['message'],
+                'userID' : request.user}
+
+        addSuggestionRecord(data)
+
+    return render(request, mainPath + 'suggestionCreate.html/re', context=context)
+
+def resolveSuggestion(request, id: int):
+    toggleResolvedSuggestion(id)
+    return redirect('/suggestion-list')
+
+def favouriteSuggestion(request, id: int):
+    toggleFavouriteSuggestion(id)
+    return redirect('/suggestion-list')
