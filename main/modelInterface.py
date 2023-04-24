@@ -96,10 +96,7 @@ def saveRoomRecord(data:dict, id:int = None):
     return RoomObject
 
 def getAppointments(showResolved = False):
-    if showResolved :
-        return Appointment.objects.all().order_by('-timeStamp')
-    else:
-        return Appointment.objects.filter(resolved = False).order_by('-timeStamp')
+    return Appointment.objects.filter(resolved = showResolved).order_by('-timeStamp')
 
 def addAppointmentRecord(data:dict):
     AppointmentObject = Appointment(
@@ -161,12 +158,9 @@ def postReview():
 def addSuggestionRecord(data:dict):
     SuggestionObject = Suggestion(
         topic = data.get('topic'),
-        message = data.get('message'))
+        message = data.get('message', ''),
+        userID = data.get('userID'))
     SuggestionObject.save()
 
-def getSuggestions(showResolved = False):
-    return Suggestion.objects.all()
-    # if showResolved :
-    #     return Suggestion.objects.all().order_by('-timeStamp')
-    # else:
-    #     return Suggestion.objects.filter(resolved = False).order_by('-timeStamp')
+def getSuggestions(showResolved = False, showFavourite = False):    
+    return Suggestion.objects.filter(favourite = showFavourite).filter(resolved = showResolved).order_by('-timeStamp')

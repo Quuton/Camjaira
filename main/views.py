@@ -20,13 +20,6 @@ def test(request):
 
     return render(request, mainPath + 'test.html/', context=context)
 
-def suggestionList(request):
-    context = {
-        'recent': getRecentPosts(),
-        'suggestion':getSuggestions()
-    }
-    return render(request, mainPath + 'suggestionList.html/', context=context)
-
 def roomList(request):
     queryData = None
 
@@ -119,22 +112,14 @@ def about(request):
 
 def appointments(request):
     if request.method == 'GET' and isOwner(request):
-        print(request.GET.get('showResolved', 'off'))
-        if request.GET.get('showResolved', 'off') == 'on':
-            context = {
+        showResolved = (request.GET.get('showResolved', 'off') == 'on')
+        context = {
                 'recent': getRecentPosts(),
                 'rooms': getFeaturedRooms(),
-                'appointments': getAppointments(True),
+                'appointments': getAppointments(showResolved),
                 'appointmentParams': request.GET,
             }
-        else:
-            context = {
-                'recent': getRecentPosts(),
-                'rooms': getFeaturedRooms(),
-                'appointments': getAppointments(False),
-                'appointmentParams': request.GET,
-            }
-            return render(request, mainPath + 'appointments.html', context=context)
+        return render(request, mainPath + 'appointments.html', context=context)
     else:
         return redirect('/forbidden')
 
@@ -288,3 +273,31 @@ def roomListReview(request, id: int):
                 'reviewList':getReviews(id)}
 
     return render(request, mainPath + 'roomListReview.html/', context=context)
+
+def suggestionList(request):
+    if request.method == 'GET' and (isOwner(request) or isAdmin(request)):
+        # showResolved = (request.GET.get('showResolved', 'off') == 'on')
+        # showFavourite = (request.GET.get('showFavourite', 'off') == 'on')
+        showResolved = True
+        showFavourite = True
+        context = {
+                'recent': getRecentPosts(),
+                'suggestions': getSuggestions(showResolved, showFavourite),
+            }
+        return render(request, mainPath + 'suggestionList.html', context=context)
+    else:
+        return redirect('/forbidden')
+
+def suggestionCreate(request):
+    context = {'recent':getRecentPosts()}
+
+    if request.method == 'POST' and isUser(request):
+        data = {
+                'topic': request.POST['topic'],
+                'message' :request.POST['message'],
+                'userID' : request.user}
+
+        addSuggestionRecord(data)
+
+    return render(request, mainPath + 'suggestionCreate.html', context=context)
+

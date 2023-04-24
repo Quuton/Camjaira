@@ -4,8 +4,16 @@
 {% block title %}Post suggestion ok{% endblock %}
 
 {% block content %}
-<form>
-    
-</form>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+  
+    <label for="id_topic">Topic:</label>
+    <input type="text" name="topic" id="id_topic" maxlength="50" required>
+  
+    <label for="id_message">Message:</label>
+    <textarea name="message" id="id_message" rows="4" cols="40"></textarea>
+  
+    <input type="submit" value="Submit">
+  </form>
 
 {% endblock %}
