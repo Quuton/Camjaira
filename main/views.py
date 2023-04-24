@@ -276,10 +276,8 @@ def roomListReview(request, id: int):
 
 def suggestionList(request):
     if request.method == 'GET' and (isOwner(request) or isAdmin(request)):
-        # showResolved = (request.GET.get('showResolved', 'off') == 'on')
-        # showFavourite = (request.GET.get('showFavourite', 'off') == 'on')
-        showResolved = True
-        showFavourite = True
+        showResolved = (request.GET.get('showResolved', 'off') == 'on')
+        showFavourite = (request.GET.get('showFavourite', 'off') == 'on')
         context = {
                 'recent': getRecentPosts(),
                 'suggestions': getSuggestions(showResolved, showFavourite),
@@ -299,5 +297,12 @@ def suggestionCreate(request):
 
         addSuggestionRecord(data)
 
-    return render(request, mainPath + 'suggestionCreate.html', context=context)
+    return render(request, mainPath + 'suggestionCreate.html/re', context=context)
 
+def resolveSuggestion(request, id: int):
+    toggleResolvedSuggestion(id)
+    return redirect('/suggestion-list')
+
+def favouriteSuggestion(request, id: int):
+    toggleFavouriteSuggestion(id)
+    return redirect('/suggestion-list')

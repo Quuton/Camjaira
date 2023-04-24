@@ -164,3 +164,13 @@ def addSuggestionRecord(data:dict):
 
 def getSuggestions(showResolved = False, showFavourite = False):    
     return Suggestion.objects.filter(favourite = showFavourite).filter(resolved = showResolved).order_by('-timeStamp')
+
+def toggleResolvedSuggestion(id:int):
+    temp = Suggestion.objects.get(id = id)
+    temp.resolved = not temp.resolved
+    temp.save()
+
+def toggleFavouriteSuggestion(id:int):
+    temp = Suggestion.objects.get(id = id)
+    temp.favourite = not temp.favourite
+    temp.save()

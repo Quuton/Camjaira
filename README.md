@@ -6,11 +6,12 @@ Pretty ok django project for school.
   - [ ] Suggestion Box
     - [x] Implement posting
     - [x] Implement viewing
-    - [ ] Implement Result filtering
+    - [x] Implement Result filtering
   - [ ] Appointment Rework
   - [ ] Review system
     - [x] Implement viewing
     - [ ] Implement posting
+    - [ ] Implement editing review
 - [ ] Write Unittests for modelInterface
   - [x] Room
   - [ ] Appointment
