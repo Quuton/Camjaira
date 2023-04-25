@@ -1,7 +1,7 @@
 # Camjaira Webserver
 Pretty ok django project for school. 
 
-## Todo List
+## Backend Todo List
 - [ ] Implement features
   - [ ] Suggestion Box
     - [x] Implement posting
@@ -21,7 +21,7 @@ Pretty ok django project for school.
 - [ ] Miscellaneous
   - [ ] Clean Code
   - [ ] Make Code Robust
-
+- [ ] Integrate front end
 
 ## Setup
 Before you can use the camjaira webserver, you need the following things.
