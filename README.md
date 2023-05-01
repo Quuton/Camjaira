@@ -10,7 +10,7 @@ Pretty ok django project for school.
   - [ ] Appointment Rework
   - [ ] Review system
     - [x] Implement viewing
-    - [ ] Implement posting
+    - [x] Implement posting
     - [ ] Implement editing review
 - [ ] Write Unittests for modelInterface
   - [x] Room

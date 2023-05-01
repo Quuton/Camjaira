@@ -28,6 +28,7 @@ urlpatterns = [
     path('wipe-appointments/', views.wipeAppointments),
     path('favourite-suggestion/<int:id>',views.favouriteSuggestion),
     path('show-reviews-room/<int:id>', views.roomListReview),
+    path('add-review/<int:roomID>', views.addReview),
     path('delete-appointment/<int:id>', views.deleteAppointment),
     path('resolve-appointment/<int:id>', views.resolveAppointment),
 ]
