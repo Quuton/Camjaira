@@ -12,7 +12,7 @@ mainPath = 'main/'
 def test(request):
     # The test function is used to test any new feature i add
     # It makes it easier since i have one dedicated test page
-    
+
     context = {
         'recent': getRecentPosts(),
         'suggestion':getSuggestions()
@@ -182,7 +182,7 @@ def roomCreate(request):
     context = {
         'recent': getRecentPosts(),
     }
-    if request.method == "POST" and request.user.is_authenticated:
+    if request.method == "POST" and request.user.is_authenticated and isOwner(request):
         data = {
             "number": request.POST['number'],
             "description": request.POST['description'],
@@ -196,7 +196,7 @@ def roomCreate(request):
         saveRoomRecord(data = data)
         return redirect('/services/')
 
-    if request.user.is_authenticated:
+    if request.user.is_authenticated and isOwner(request):
         return render(request, mainPath + 'roomCreate.html', context=context)
     else:
         return render(request, mainPath + 'forbidden.html', context=None)
@@ -306,3 +306,19 @@ def resolveSuggestion(request, id: int):
 def favouriteSuggestion(request, id: int):
     toggleFavouriteSuggestion(id)
     return redirect('/suggestion-list')
+
+def addReview(request, roomID:int):
+    context = {'recent':getRecentPosts()}
+    if request.user.is_authenticated and isUser(request):
+        if request.method == "POST":
+            data = {
+                "cleanlinessRating": request.POST.get('cleanlinessRating',0),
+                "aestheticRating": request.POST.get('aestheticRating',0),
+                "comfortRating": request.POST.get('comfortRating',0),
+                "valueRating": request.POST.get('valueRating',0),
+                "comment": request.POST.get('comment'),
+            }
+            addReviewRecord(data, request.user.id, roomID)
+        return render(request, mainPath + 'reviewCreate.html', context=context)
+    else:
+        return redirect('/forbidden')
