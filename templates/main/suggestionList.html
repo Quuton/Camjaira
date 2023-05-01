@@ -1,0 +1,49 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Sexy{% endblock %}
+
+{% block content %}
+<h1>Suggestions</h1>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <form method="get">
+                <label for="id_favourite">Show Favourite:</label>
+                <input type="checkbox" name="showFavourite" id="id_favourite">
+
+                <label for="id_resolved">Show resolved:</label>
+                <input type="checkbox" name="showResolved" id="id_resolved">
+
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table style="width:100%">
+                {% for i in suggestions %}
+                    <tr>
+                        <td>ID: {{i.id}}</td>
+                        <td>Topic: {{i.Topic}}</td>
+                        <td>
+                            {{i.message}}
+                        </td>
+                        <td>
+                            <ul>
+                                <li><a href="/favourite-suggestion/{{i.id}}">favourite: {{i.favourite}}</a></li>
+                                <li>userID: {{i.userID}}</li>
+                                <li>timeStamp: {{i.timeStamp}}</li>
+                                <li><a href="/resolve-suggestion/{{i.id}}">resolved: {{i.resolved}}</a></li>
+                            </ul>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

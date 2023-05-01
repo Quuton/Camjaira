@@ -4,23 +4,32 @@
 {% block title %}Sexy{% endblock %}
 
 {% block content %}
+<h1>Suggestions</h1>
 
-<h2>UserID: {{userid}}</H2>
-<h2>UserName: {{username}}</h2>
-
-<h2>
-Main Account type: {{ accountType }}
-</h2>
-
-<ul>
-    <li>isUser? {{isUser}}</li>
-    <li>isOwner? {{isOwner}}</li>
-    <li>isAdmin? {{isAdmin}}</li>
-</ul>
-
-<h2>Profile Picture: <img style="max-width:200px;height:auto;object-fit:cover" id="roomFormImage" src="{{picture.url}}"
-    alt="your image" /></h2>
-
-<h2>Img src: {{picture.url}}</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <table style="width:100%">
+                {% for i in suggestion %}
+                    <tr>
+                        <td>ID: {{i.id}}</td>
+                        <td>Topic: {{i.Topic}}</td>
+                        <td>
+                            {{i.message}}
+                        </td>
+                        <td>
+                            <ul>
+                                <li>favourite: {{i.favourite}}</li>
+                                <li>userID: {{i.userID}}</li>
+                                <li>timeStamp: {{i.timeStamp}}</li>
+                                <li>resolved: {{i.resolved}}</li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

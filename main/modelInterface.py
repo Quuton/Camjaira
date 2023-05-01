@@ -3,6 +3,7 @@ from .models import *
 import random
 import itertools as it
 from django.contrib.auth.models import Group
+from django.contrib.auth import get_user_model
 from django.db.models import Avg
 def generateRoomData(n:int):
     for i in range(0,n):
@@ -96,18 +97,15 @@ def saveRoomRecord(data:dict, id:int = None):
     return RoomObject
 
 def getAppointments(showResolved = False):
-    if showResolved :
-        return Appointment.objects.all().order_by('-timeStamp')
-    else:
-        return Appointment.objects.filter(resolved = False).order_by('-timeStamp')
+    return Appointment.objects.filter(resolved = showResolved).order_by('-timeStamp')
 
 def addAppointmentRecord(data:dict):
     AppointmentObject = Appointment(
-        name = data['name'],
-        email = data['email'],
-        topic = data['topic'],
-        message = data['message'],
-        ipAddress = data['ipAddress'])
+        name = data.get('name'),
+        email = data.get('email'),
+        topic = data.get('topic'),
+        message = data.get('message'),
+        ipAddress = data.get('ipAddress'))
     AppointmentObject.save()
 
 def deleteAppointmentRecord(id:int):
@@ -129,11 +127,11 @@ def getRoomImage(id:int):
     return temp.image
 
 def register(data:dict, picture):
-    username = data['username']
-    first_name = data['firstname']
-    last_name = data['lastname']
-    email = data['email']
-    password = data['password']
+    username = data.get('username')
+    first_name = data.get('firstname')
+    last_name = data.get('lastname')
+    email = data.get('email')
+    password = data.get('password')
     avatar = picture
     user = User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)
     group = Group.objects.get(name='User')
@@ -154,6 +152,52 @@ def getReviews(roomID:int):
 
 def getReviewAverageScores(roomID:int):
     return Review.objects.filter(roomID = roomID).aggregate(Avg('cleanlinessRating'), Avg('aestheticRating'), Avg('comfortRating'), Avg('valueRating'))
-    
-def postReview():
-    pass
+
+def deleteReviewtRecord(id:int):
+    Review.objects.filter(id = id).delete()
+
+
+def addReviewRecord(data:dict, userID, roomID:int, id:int = None):
+    User = get_user_model()
+    if id == None:
+        # Check if post has been made already
+        if not Review.objects.filter(roomID=roomID, userID=userID).exists():
+            reviewObject = Review( 
+                cleanlinessRating = data.get('cleanlinessRating', 0),
+                aestheticRating = data.get('aestheticRating', 0),
+                comfortRating = data.get('comfortRating', 0),
+                valueRating = data.get('valueRating', 0),
+                comment = data.get('comment', ''),
+                userID = User.objects.get(id = userID),
+                roomID = Room.objects.get(id = roomID))
+            reviewObject.save()
+    # else:
+    #     try:
+    #         reviewObject = Review.objects.filter(id = id)
+    #         reviewObject.cleanlinessRating = data.get('cleanlinessRating', reviewObject.cleanlinessRating),
+    #         reviewObject.aestheticRating = data.get('aestheticRating', reviewObject.aestheticRating),
+    #         reviewObject.comfortRating = data.get('comfortRating', reviewObject.comfortRating),
+    #         reviewObject.valueRating = data.get('valueRating', reviewObject.valueRating),
+    #         reviewObject.comment = data.get('comment', reviewObject.comment)
+    #     except Room.DoesNotExists:
+    #         return None
+
+def addSuggestionRecord(data:dict):
+    SuggestionObject = Suggestion(
+        topic = data.get('topic'),
+        message = data.get('message', ''),
+        userID = data.get('userID'))
+    SuggestionObject.save()
+
+def getSuggestions(showResolved = False, showFavourite = False):    
+    return Suggestion.objects.filter(favourite = showFavourite).filter(resolved = showResolved).order_by('-timeStamp')
+
+def toggleResolvedSuggestion(id:int):
+    temp = Suggestion.objects.get(id = id)
+    temp.resolved = not temp.resolved
+    temp.save()
+
+def toggleFavouriteSuggestion(id:int):
+    temp = Suggestion.objects.get(id = id)
+    temp.favourite = not temp.favourite
+    temp.save()

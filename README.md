@@ -1,11 +1,17 @@
 # Camjaira Webserver
 Pretty ok django project for school. 
 
-## Todo List
+## Backend Todo List
 - [ ] Implement features
-  - [ ] Suggestion Box
+  - [x] Suggestion Box
+    - [x] Implement posting
+    - [x] Implement viewing
+    - [x] Implement Result filtering
   - [ ] Appointment Rework
   - [ ] Review system
+    - [x] Implement viewing
+    - [x] Implement posting
+    - [ ] Implement editing review
 - [ ] Write Unittests for modelInterface
   - [x] Room
   - [ ] Appointment
@@ -15,7 +21,7 @@ Pretty ok django project for school.
 - [ ] Miscellaneous
   - [ ] Clean Code
   - [ ] Make Code Robust
-
+- [ ] Integrate front end
 
 ## Setup
 Before you can use the camjaira webserver, you need the following things.
