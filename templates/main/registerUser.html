@@ -4,36 +4,55 @@
 {% block title %}Post suggestion ok{% endblock %}
 
 {% block content %}
-<h1>THIS IS A TEST PAGE, DO NOT USE THIS IN PROD
-    
-</h1>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="id_username">Username</label>
-        <input type="text" name="username" id="id_username" required>
-    </div>
-    <div class="form-group">
-        <label for="id_password">Password</label>
-        <input type="password" name="password" id="id_password" required>
-    </div>
-    <div class="form-group">
-        <label for="id_firstname">firstname</label>
-        <input type="text" name="firstname" id="id_firstname" required>
-    </div>
-    <div class="form-group">
-        <label for="id_lastname">lastname</label>
-        <input type="text" name="lastname" id="id_lastname" required>
-    </div>
-    <div class="form-group">
-        <label for="id_email">Email address</label>
-        <input type="email" name="email" id="id_email" required>
-    </div>
-    <div class="form-group">
-        <label for="id_avatar">Avatar</label>
-        <input accept="image/*" type='file' name="avatar" id="id_avatar">
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
-</form>
+<div class="container-fluid contact">
+    <div class="container my-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12">
+                <div class="titlepage p-0 text-md-left text-center">
+                    <h2>Login Page</h2>
+                </div>
+            </div>
 
+        </div>
+        <div class="row my-5">
+            <div class="col-12 d-flex justify-content-center">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="id_username">Username</label>
+                        <input type="text" name="username" id="id_username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_password">Password</label>
+                        <input type="password" name="password" id="id_password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_firstname">firstname</label>
+                        <input type="text" name="firstname" id="id_firstname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_lastname">lastname</label>
+                        <input type="text" name="lastname" id="id_lastname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_email">Email address</label>
+                        <input type="email" name="email" id="id_email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="id_avatar">Avatar</label>
+                        <input accept="image/*" type='file' name="avatar" id="id_avatar">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+        </div>
+        <div class="row my-5">
+            <div class="col-12 d-flex text-center justify-content-center">
+                <p class="text-center justify-content-center ">{{loginStatus}}</p>
+            </div>
+        </div>
+        <a href="/register" style="text-align:center;outline:red solid 2px; font-size: large;">Don't have an account? Create one</a>
+    </div>
+
+</div>
 {% endblock %}

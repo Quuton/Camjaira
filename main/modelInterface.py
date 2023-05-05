@@ -104,8 +104,10 @@ def addAppointmentRecord(data:dict):
         name = data.get('name'),
         email = data.get('email'),
         topic = data.get('topic'),
+        scheduledDate = data.get('scheduledDate'),
         message = data.get('message'),
-        ipAddress = data.get('ipAddress'))
+        ipAddress = data.get('ipAddress'),
+        userID = data.get('userID'))
     AppointmentObject.save()
 
 def deleteAppointmentRecord(id:int):

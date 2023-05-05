@@ -4,16 +4,44 @@
 {% block title %}Post suggestion ok{% endblock %}
 
 {% block content %}
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    
-    <label for="id_topic">Topic:</label>
-    <input type="text" name="topic" id="id_topic" maxlength="50" required>
-  
-    <label for="id_message">Message:</label>
-    <textarea name="message" id="id_message" rows="4" cols="40"></textarea>
-  
-    <input type="submit" value="Submit">
-</form>
 
+
+<div class="container-fluid contact">
+    <div class="container my-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12">
+                <div class="titlepage p-0 text-md-left text-center">
+                    <h2>Submit a suggestion!</h2>
+                </div>
+            </div>
+
+        </div>
+        <div class="row my-5">
+            <div class="col-12 d-flex justify-content-center">
+                <form method="POST" enctype="multipart/form-data" class="row">
+                    {% csrf_token %}
+                    <div class="col-12">
+                        <label for="id_topic">Topic:</label>    
+                        <input type="text" name="topic" id="id_topic" maxlength="50" required>
+                    </div>
+                    
+                    <div class="col-12">
+                        <label for="id_message">Message:</label>
+                    <textarea name="message" id="id_message" rows="4" cols="40"></textarea>
+                    </div>
+                    
+                  
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+        <div class="row my-5">
+            <div class="col-12 d-flex text-center justify-content-center">
+                <p class="text-center justify-content-center ">{{loginStatus}}</p>
+            </div>
+        </div>
+        <a href="/register" style="text-align:center;outline:red solid 2px; font-size: large;">Don't have an account? Create one</a>
+    </div>
+
+</div>
 {% endblock %}

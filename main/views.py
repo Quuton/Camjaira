@@ -78,19 +78,21 @@ def login(request):
 def contact(request):
     status = False
     if isUser(request):
+
         if request.method == "POST":
             data = {
                 "name": request.POST['name'],
                 "email": request.POST['email'],
                 "topic": request.POST['topic'],
+                "scheduledDate": request.POST['scheduledDate'],
                 "message": request.POST['message'],
                 "ipAddress": request.META.get("REMOTE_ADDR"),
+                "userID":request.user
             }
             addAppointmentRecord(data)
             status = True
 
-        else:
-            context = {
+        context = {
                 'recent': getRecentPosts(),
                 'appointmentSaveStatus': status,
             }
@@ -270,7 +272,8 @@ def userPage(request):
 def roomListReview(request, id: int):
 
     context = {'recent':getRecentPosts(),
-                'reviewList':getReviews(id)}
+                'reviewList':getReviews(id)
+                }
 
     return render(request, mainPath + 'roomListReview.html/', context=context)
 
@@ -297,7 +300,7 @@ def suggestionCreate(request):
 
         addSuggestionRecord(data)
 
-    return render(request, mainPath + 'suggestionCreate.html/re', context=context)
+    return render(request, mainPath + 'suggestionCreate.html/', context=context)
 
 def resolveSuggestion(request, id: int):
     toggleResolvedSuggestion(id)
@@ -319,6 +322,7 @@ def addReview(request, roomID:int):
                 "comment": request.POST.get('comment'),
             }
             addReviewRecord(data, request.user.id, roomID)
+            return redirect(f'/show-room/{roomID}')
         return render(request, mainPath + 'reviewCreate.html', context=context)
     else:
         return redirect('/forbidden')
