@@ -46,14 +46,15 @@ python camjaira/manage.py runserver
 python camjaira/manage.py runserver 0.0.0.0:8000
 ```
 
+### Create an admin user
+For this page -> localhost:8000/admin
+```
+python camjaira/manage.py createsuperuser
+```
+
 ### Reset the database
 
 ```
 python camjaira/manage.py flush
 ```
 
-### Create a superuser
-
-```
-python camjaira/manage.py createsuperuser
-```
