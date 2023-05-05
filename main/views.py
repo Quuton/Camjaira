@@ -18,7 +18,7 @@ def test(request):
         'suggestion':getSuggestions()
     }
 
-    return render(request, mainPath + 'test.html/', context=context)
+    return render(request, mainPath + 'Account.html/', context=context)
 
 def roomList(request):
     queryData = None
