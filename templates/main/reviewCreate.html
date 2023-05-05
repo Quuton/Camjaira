@@ -4,23 +4,44 @@
 {% block title %}Sexy{% endblock %}
 
 {% block content %}
-<h1>Create Review ig</h1>
 
-<form method="POST">
-    {% csrf_token %}
-    <label>cleanliness</label>
-    <input type="number" name="cleanlinessRating"></input>
-    <label>aesthetic</label>
-    <input type="number" name="aestheticRating"></input>
-    <label>comfortRating</label>
-    <input type="number" name="comfortRating"></input>
-    <label>valueRating</label>
-    <input type="number" name="valueRating"></input>
-    <label>Comment</label>
-    <textarea name="comment"></textarea>
+<div class="container-fluid contact">
+    <div class="container my-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12">
+                <div class="titlepage p-0 text-md-left text-center">
+                    <h2>Create a Review!</h2>
+                </div>
+            </div>
 
-    <input type="submit">
-</form>
+        </div>
+        <div class="row my-5">
+            <div class="col-12 d-flex justify-content-center">
+                <form method="POST" class="row">
+                    {% csrf_token %}
+                    <div class="col-12">
+                        <label>cleanliness</label>
+                        <input type="number" name="cleanlinessRating"></input>
+                        <label>aesthetic</label>
+                        <input type="number" name="aestheticRating"></input>
+                        <label>comfortRating</label>
+                        <input type="number" name="comfortRating"></input>
+                        <label>valueRating</label>
+                        <input type="number" name="valueRating"></input>
+    
+                    </div>
 
+                    <div class="col-12">
+                        <label>Comment</label>
+                        <textarea name="comment"></textarea>
+    
+                    </div>
+                
+                    <input type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

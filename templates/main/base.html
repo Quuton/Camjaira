@@ -29,6 +29,7 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <link rel="stylesheet" href="{% static 'css/account.css' %}">
 </head>
 <!-- body -->
 
@@ -70,18 +71,27 @@
                             <li class="d-none d-lg-block " style="font-size: 20px"> <a href="/services/">ROOMS</a>
                             </li>
 
-                            {% if user.is_authenticated %}
+                            {% for group in  request.user.groups.all %}
+                            {%  if 'Owner' == group.name %}
                             <li class="d-none d-lg-block " style="font-size: 20px"> <a href="/appointments/">VIEW
-                                    APPOINTMENTS</a>
-                                {% else %}
+                                APPOINTMENTS</a>
+                            <li class="d-none d-lg-block " style="font-size: 20px"> <a href="/suggestion-list/">
+                                    SEE SUGGESTIONS</a>
+                            {% elif 'User' == group.name %}
                             <li class="d-none d-lg-block " style="font-size: 20px"> <a href="/contact/">CONTACT US</a>
                             </li>
+                            <li class="d-none d-lg-block " style="font-size: 20px"> <a href="/suggestion-create/">
+                                MAKE A SUGGESTION</a>
                             {% endif %}
+                            {% endfor %}
 
                             {% if user.is_authenticated %}
+
                             <li class="d_none"><a href="/logout/">LOGOUT <img style='height:4ex;filter:invert(100%);'
                                         src="{%static 'icon/logout.svg'%}"></a></li>
+
                             {% else %}
+
                             <li class="d_none"><a href="/login/">LOGIN <img style='height:4ex;filter:invert(100%);'
                                         src="{%static 'icon/login.svg'%}"></a></li>
                             {% endif %}

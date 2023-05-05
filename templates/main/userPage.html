@@ -4,19 +4,17 @@
 {% block title %} User Page {% endblock %}
 
 {% block content %}
-<div class = "container-fluid my-5">
+<div class = "container my-5">
     <div class="row">
-        <h1>User test page</h1>
+        <div class="titlepage">
+            <h2>User Profile</h2>
+            <span>View information about your profile here</span>
+        </div>
     </div>
 
     <div class="row">
         <div class="col-12">
-            <h2>Main Account group: {{ accountType }}</h2>
-        </div>
-        <div class="col-12">
-            <li>isUser? {{isUser}}</li>
-            <li>isOwner? {{isOwner}}</li>   
-            <li>isAdmin? {{isAdmin}}</li>   
+            <h2>Account Type: {{ accountType }}</h2>
         </div>
     </div>
 
@@ -28,13 +26,12 @@
             </ul>
         </div>
 
-        <div class="col-6 justfiy-content-center">
-            <img style="width:40%;height:auto;object-fit:cover;" id="roomFormImage" src="{{picture.url}}"
+        <div class="col-6 justfiy-content-center mx-auto align-items-middle">
+            <img style="margin-block: auto;width:40%;height:auto;object-fit:cover;border-radius:50%;border:black solid 2px;margin-inline:auto;align-items: center;justify-content: center;display:block" id="roomFormImage" src="{{picture.url}}"
             alt="your image" />
         </div>
     </div>
     
 </div>
-
 
 {% endblock %}
